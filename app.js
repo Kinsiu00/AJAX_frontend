@@ -50,7 +50,7 @@ window.addEventListener('load', () => {
             })
             .catch( error => {
               console.error(error)})
-              
+
             event.preventDefault();
           })
 
@@ -122,7 +122,13 @@ window.addEventListener('load', () => {
 
             //SUBMISSION
             submitButton.addEventListener('click', event => {
-              console.log('submit button clicked')
+              axios.put(`${baseURL}/${currentID}`, {
+                title: formT.value,
+                content: formC.value
+              })
+              .catch( error => {
+                console.error(error)})
+
               event.preventDefault();
             })
 
