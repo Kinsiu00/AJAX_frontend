@@ -43,6 +43,17 @@ window.addEventListener('load', () => {
           forms.insertAdjacentElement('afterbegin', spacer)
           forms.insertAdjacentElement('afterbegin', formC)
 
+          submitButton.addEventListener('click', event => {
+            axios.post(`${baseURL}`, {
+              title: formT.value,
+              content: formC.value
+            })
+            .catch( error => {
+              console.error(error)})
+              
+            event.preventDefault();
+          })
+
           event.preventDefault();
         })
 
