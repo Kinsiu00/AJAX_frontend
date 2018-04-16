@@ -1,12 +1,14 @@
 window.addEventListener('load', () => {
   let currentID;
   console.log("load is running!")
-  const baseURL = 'http://localhost:3000/blogposts/';
+  const baseURL = 'http://localhost:3000/blogposts';
   const pullPosts = () => {
     const blogPostList = document.createElement('ul');
     axios.get(`${baseURL}`)
       .then(response => {
         const list = response.data;
+        const navList = document.getElementById('allPosts');
+
 
 //CREATE
         let newPostButton = document.createElement('button');
@@ -28,25 +30,31 @@ window.addEventListener('load', () => {
           buttons.appendChild(submitButton)
           buttons.appendChild(cancelButton)
 
-          let formT = document.createElement('input');
-          formT.type = "text"
-          formT.name = "title"
-          formT.value = ""
-          forms.insertAdjacentElement('afterbegin', formT)
-
           let formC = document.createElement('input');
+          formC.type = "text"
+          formC.name = "title"
+          formC.value = ""
+          forms.insertAdjacentElement('afterbegin', formC)
+
+          let formT = document.createElement('input');
           let spacer = document.createElement('br');
 
-          formC.type = "text"
-          formC.name = "content"
-          formC.value = ""
+          formT.type = "text"
+          formT.name = "content"
+          formT.value = ""
           forms.insertAdjacentElement('afterbegin', spacer)
-          forms.insertAdjacentElement('afterbegin', formC)
+          forms.insertAdjacentElement('afterbegin', formT)
 
           submitButton.addEventListener('click', event => {
             axios.post(`${baseURL}`, {
               title: formT.value,
               content: formC.value
+            })
+            .then( ()=> {
+              while (navList.hasChildNodes()) {
+                navList.removeChild(navList.firstChild);
+              }
+              pullPosts()
             })
             .catch( error => {
               console.error(error)})
@@ -62,7 +70,6 @@ window.addEventListener('load', () => {
           const li = document.createElement('li');
           li.innerHTML = `${post.title}`;
           blogPostList.appendChild(li);
-          const navList = document.getElementById('allPosts');
           navList.appendChild(li);
 
           li.addEventListener('click', list => {
