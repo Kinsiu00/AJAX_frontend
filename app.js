@@ -13,13 +13,12 @@ window.addEventListener('load', () => {
         newPostButton.innerHTML = "New Post";
         let buttons = document.getElementById('buted');
         buttons.appendChild(newPostButton);
-
+        const forms = document.querySelector('form')
         newPostButton.addEventListener('click', event => {
           while (buttons.hasChildNodes()) {
             buttons.removeChild(buttons.firstChild);
           }
-          const forms = document.querySelector('form')
-          const buttons = document.getElementById('buted')
+
 
           //make submit and cancel buttons
           const submitButton = document.createElement('button')
@@ -32,7 +31,7 @@ window.addEventListener('load', () => {
           let formT = document.createElement('input');
           formT.type = "text"
           formT.name = "title"
-          formT.value = "test"
+          formT.value = ""
           forms.insertAdjacentElement('afterbegin', formT)
 
           let formC = document.createElement('input');
@@ -40,7 +39,7 @@ window.addEventListener('load', () => {
 
           formC.type = "text"
           formC.name = "content"
-          formC.value = "test"
+          formC.value = ""
           forms.insertAdjacentElement('afterbegin', spacer)
           forms.insertAdjacentElement('afterbegin', formC)
 
